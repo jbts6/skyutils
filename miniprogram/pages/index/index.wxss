@@ -1,0 +1,24 @@
+/**index.wxss**/
+
+.page {
+  background-color: #f6f6f6;
+  padding: 8rpx 16rpx;
+}
+.header {
+  text-align: center;
+}
+.header-content {
+  display: inline-block;
+  width: 500rpx;
+  text-align: left;
+}
+.page-section-gap {
+  margin-top: 24rpx;
+}
+.checkbox + .checkbox {
+  margin-left: 44rpx;
+}
+.result {
+  height: 44rpx;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+<!--index.wxml-->
+<view class="page" data-weui-theme="light">
+  <view class="header">
+    <view class="header-content">
+      <text>1.记忆密码复杂一点（固定）</text>
+    </view>
+    <view class="header-content">
+      <text>2.区分代码表示该密码用途，如qq</text>
+    </view>
+    <view class="header-content">
+      <text>3.生成的密码会自动复制</text>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells__title">记忆密码</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input model:value="{{password}}" class="weui-input" />
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells__title">区分代码</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input model:value="{{code}}" class="weui-input" />
+      </view>
+    </view>
+  </view>
+  <view class="page-section page-section-gap">
+    <text class="weui-cells__title">密码长度</text>
+    <view class="weui-cells weui-cells_after-title">
+        <slider min="8" max="20" show-value model:value="{{length}}"/>
+    </view>
+  </view>
+  <view class="page-section page-section-gap">
+    <label class="checkbox">
+      <checkbox value="symbol" model:checked="{{useSymbol}}"/>使用标点
+    </label>
+  </view>
+  <view class="page-section page-section-gap result">
+    <text user-select>{{result}}</text>
+  </view>
+  <view class="page-section page-section-gap">
+    <button type="primary" plain="true" bindtap="generate">生成</button>
+  </view>
+</view>
