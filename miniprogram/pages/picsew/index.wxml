@@ -1,22 +1,27 @@
 <!--index.wxml-->
 <view class="page">
   <view class="header">
-    <button type="primary" size="mini" plain="true" bindtap="chooseImage">选择图片</button>
+    <button type="default" size="mini" plain="true" bindtap="chooseImage">选图</button>
+    <radio-group class="options" bindchange="radioChange">
+      <radio wx:for="{{options}}" wx:key="value" value="{{item.value}}" class="options-radio" checked="{{item.checked}}">{{item.name}}</radio>
+    </radio-group>
+    <button type="primary" size="mini" plain="true" bindtap="generate">拼接</button>
   </view>
-  <radio-group class="options" bindchange="radioChange">
-    <radio wx:for="{{options}}" wx:key="value" value="{{item.value}}" class="options-radio" checked="{{item.checked}}">{{item.name}}</radio>
-  </radio-group>
-  <view class="action">
-    <button type="primary" plain="true" bindtap="generate">生成</button>
+  <view class="wrapper" style="width: {{windowWidth - 24 + 'px'}};height: {{windowHeight - 100 + 'px'}}">
+    <scroll-view 
+    class="main {{picsewWay === 'horizon' ? '' : 'column'}}" 
+    scroll-x="{{picsewWay === 'horizon'}}" 
+    scroll-y="{{picsewWay === 'vertical'}}"
+    enable-flex>
+      <view wx:for="{{images}}" wx:key="item" class="image">
+        <image 
+        mode="{{picsewWay === 'horizon' ? 'heightFix' : 'widthFix'}}"
+        style="width: {{picsewWay === 'horizon' ? 'auto' : windowWidth - 24 + 'px'}};height: {{picsewWay === 'horizon' ? '100%' : 'auto'}}"
+        data-src="{{item}}" 
+        src="{{item}}"
+        bindtap="previewImage"
+        ></image>
+      </view>
+    </scroll-view>
   </view>
-  <scroll-view class="main" scroll-x enable-flex>
-    <view wx:for="{{images}}" wx:key="item" class="image">
-      <image 
-      mode="heightFix" 
-      data-src="{{item}}" 
-      src="{{item}}"
-      bindtap="previewImage"
-      ></image>
-    </view>
-  </scroll-view>
 </view>

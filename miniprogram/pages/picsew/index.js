@@ -5,7 +5,20 @@ Page({
       {name: '横向', value: 'horizon', checked: true},
       {name: '纵向', value: 'vertical', checked: false}
     ],
-    picsewWay: 'horizon'
+    picsewWay: 'horizon',
+    windowWidth: 0,
+    windowHeight: 0
+  },
+  onReady() {
+    const self = this;
+    wx.getSystemInfo({
+      success (res) {
+        self.setData({
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight
+        });
+      }
+    })
   },
   radioChange(e) {
     const options = this.data.options;
