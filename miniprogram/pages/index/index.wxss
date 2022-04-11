@@ -4,21 +4,16 @@
   background-color: #f6f6f6;
   padding: 8rpx 16rpx;
 }
-.header {
+.page-line {
+  display: flex;
+  justify-content: space-around;
+}
+.page-card {
+  width: 40%;
   text-align: center;
-}
-.header-content {
-  display: inline-block;
-  width: 500rpx;
-  text-align: left;
-}
-.page-section-gap {
-  margin-top: 24rpx;
-}
-.checkbox + .checkbox {
-  margin-left: 44rpx;
-}
-.result {
-  height: 44rpx;
-  text-align: center;
+  height: 88rpx;
+  line-height: 80rpx;
+  border-radius: 16rpx;
+  font-weight: bold;
+  background-color: var(--color);
 }
