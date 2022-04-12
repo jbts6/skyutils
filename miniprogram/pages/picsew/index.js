@@ -1,3 +1,5 @@
+import asyncGenerator from '../../utils/asyncGenerator';
+
 Page({
   data: {
     images: [],
@@ -5,20 +7,19 @@ Page({
       {name: '横向', value: 'horizon', checked: true},
       {name: '纵向', value: 'vertical', checked: false}
     ],
-    picsewWay: 'horizon',
+    direction: 'horizon',
     windowWidth: 0,
     windowHeight: 0
   },
   onReady() {
-    const self = this;
-    wx.getSystemInfo({
-      success (res) {
-        self.setData({
-          windowWidth: res.windowWidth,
-          windowHeight: res.windowHeight
-        });
-      }
-    })
+    this.setSize();
+  },
+  async setSize() {
+    const {windowWidth, windowHeight} = await wx.getSystemInfo();
+    this.setData({
+      windowWidth,
+      windowHeight
+    });
   },
   radioChange(e) {
     const options = this.data.options;
@@ -28,7 +29,7 @@ Page({
     }
     this.setData({
       options,
-      picsewWay: value
+      direction: value
     })
   },
   chooseImage() {
@@ -51,7 +52,18 @@ Page({
       urls: this.data.images // 需要预览的图片http链接列表
     })
   },
-  generate() {
-    console.log(this.data.picsewWay);
+  async generate() {
+    let arr = [];
+    for await (const [src] of asyncGenerator(this.data.images)) {
+      const {width, height} = await wx.getImageInfo({
+        src,
+      })
+      arr.push({
+        src,
+        width,
+        height
+      })
+    }
+    console.log(arr);
   }
 })

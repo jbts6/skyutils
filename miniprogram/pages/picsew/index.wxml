@@ -9,19 +9,18 @@
   </view>
   <view class="wrapper" style="width: {{windowWidth - 24 + 'px'}};height: {{windowHeight - 100 + 'px'}}">
     <scroll-view 
-    class="main {{picsewWay === 'horizon' ? '' : 'column'}}" 
-    scroll-x="{{picsewWay === 'horizon'}}" 
-    scroll-y="{{picsewWay === 'vertical'}}"
+    class="main {{direction === 'horizon' ? '' : 'column'}}" 
+    scroll-x="{{direction === 'horizon'}}" 
+    scroll-y="{{direction === 'vertical'}}"
     enable-flex>
-      <view wx:for="{{images}}" wx:key="item" class="image">
-        <image 
-        mode="{{picsewWay === 'horizon' ? 'heightFix' : 'widthFix'}}"
-        style="width: {{picsewWay === 'horizon' ? 'auto' : windowWidth - 24 + 'px'}};height: {{picsewWay === 'horizon' ? '100%' : 'auto'}}"
+      <image 
+        wx:for="{{images}}" wx:key="item" class="image"
+        mode="{{direction === 'horizon' ? 'heightFix' : 'widthFix'}}"
+        style="width: {{direction === 'horizon' ? 'auto' : windowWidth - 24 + 'px'}};height: {{direction === 'horizon' ? '100%' : 'auto'}}"
         data-src="{{item}}" 
         src="{{item}}"
         bindtap="previewImage"
-        ></image>
-      </view>
+      ></image>
     </scroll-view>
   </view>
 </view>
