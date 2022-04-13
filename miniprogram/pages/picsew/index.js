@@ -1,4 +1,5 @@
 import asyncGenerator from '../../utils/asyncGenerator';
+let loading = false;
 
 Page({
   data: {
@@ -9,7 +10,8 @@ Page({
     ],
     direction: 'horizon',
     windowWidth: 0,
-    windowHeight: 0
+    windowHeight: 0,
+    palette: {}
   },
   onReady() {
     this.setSize();
@@ -35,11 +37,10 @@ Page({
   chooseImage() {
     const self = this;
     wx.chooseImage({
-      count: 3,
-      sizeType: ['original', 'compressed'],
+      count: 9,
+      sizeType: ['compressed'],
       sourceType: ['album'],
       success (res) {
-        // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths;
         self.setData({images: tempFilePaths});
       }
@@ -53,6 +54,12 @@ Page({
     })
   },
   async generate() {
+    if (loading) {
+      return;
+    }
+    wx.showLoading({
+      title: '正在拼接',
+    });
     let arr = [];
     for await (const [src] of asyncGenerator(this.data.images)) {
       const {width, height} = await wx.getImageInfo({
@@ -64,6 +71,59 @@ Page({
         height
       })
     }
-    console.log(arr);
+    let width = 0, height = 0, views = [];
+    if (this.data.direction === 'horizon') {
+      height = Math.max(...arr.map(i => i.height));
+      width = arr.reduce((s, n) => s += n.width, 0);
+      let left = 0;
+      views = arr.map(i => {
+        const image = {
+          type: 'image',
+          url: i.src,
+          css:{
+            width: i.width + 'px',
+            height: i.height + 'px',
+            top: (height - i.height) / 2 + 'px',
+            left: left + 'px'
+          },
+        }
+        left += i.width;
+        return image;
+      })
+    } else {
+      width = Math.max(...arr.map(i => i.width));
+      height = arr.reduce((s, n) => s += n.height, 0);
+      let top = 0;
+      views = arr.map(i => {
+        const image = {
+          type: 'image',
+          url: i.src,
+          css: {
+            width: i.width + 'px',
+            height: i.height + 'px',
+            top: top + 'px',
+            left: (width - i.width) / 2 + 'px'
+          }
+        }
+        top += i.height;
+        return image;
+      })
+    }
+    this.setData({
+      palette: {
+        width: width + 'px',
+        height: height + 'px',
+        views: views
+      }
+    })
+  },
+  onImgOK(e) {
+    loading = true;
+    wx.saveImageToPhotosAlbum({
+      filePath: e.detail.path,
+    }).then(() => {
+      loading = false;
+      wx.hideLoading();
+    })
   }
 })
