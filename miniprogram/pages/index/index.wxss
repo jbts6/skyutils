@@ -17,3 +17,7 @@
   font-weight: bold;
   background-color: var(--color);
 }
+.more {
+  margin-left: 24rpx;
+  color: #07c160;
+}

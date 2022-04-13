@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  align-items:baseline;
+  align-items: baseline;
 }
 .wrapper {
   margin: 12px;

@@ -1,5 +1,6 @@
 // index.js
 // const app = getApp()
+import changelog from '../../changelog';
 Page({
   data: {
     pages: [
@@ -17,7 +18,8 @@ Page({
           icon: ''
         }
       ]
-    ]
+    ],
+    changelog: changelog[0]
   },
   jumpTo (e) {
     const page = e.target.dataset.page;

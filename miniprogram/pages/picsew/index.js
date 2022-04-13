@@ -11,6 +11,7 @@ Page({
     direction: 'horizon',
     windowWidth: 0,
     windowHeight: 0,
+    isReady: false,
     palette: {}
   },
   onReady() {
@@ -55,6 +56,13 @@ Page({
   },
   async generate() {
     if (loading) {
+      return;
+    }
+    if (this.data.images.length === 0) {
+      wx.showToast({
+        title: '请先选择图片',
+        icon: 'none'
+      });
       return;
     }
     wx.showLoading({
@@ -114,7 +122,8 @@ Page({
         width: width + 'px',
         height: height + 'px',
         views: views
-      }
+      },
+      isReady: true
     })
   },
   onImgOK(e) {
@@ -124,6 +133,9 @@ Page({
     }).then(() => {
       loading = false;
       wx.hideLoading();
+      this.setData({
+        isReady: false
+      })
     })
   }
 })

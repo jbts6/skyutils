@@ -1,5 +1,12 @@
 <!--index.wxml-->
 <view class="page" data-weui-theme="light">
+  <view class="notice">
+    <text>版本: {{changelog.version}}</text>
+    <text class="more" data-page="changelog" bindtap="jumpTo">更多</text>
+  </view>
+  <view>
+    <text>更新: {{changelog.info}}</text>
+  </view>
   <view class="page-line" wx:for="{{pages}}" wx:key="index" wx:for-item="line">
     <view class="page-card" wx:for="{{line}}" wx:key="page" data-page="{{item.page}}" style="--color:{{item.color}}" bindtap="jumpTo">{{item.name}}</view>
   </view>

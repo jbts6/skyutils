@@ -23,5 +23,10 @@
       ></image>
     </scroll-view>
   </view>
-  <painter palette="{{palette}}" bind:imgOK="onImgOK" scaleRatio="0.8" style="position:fixed;top:-9999rpx"/>
+  <painter 
+    wx:if="{{isReady}}" 
+    palette="{{palette}}" 
+    bind:imgOK="onImgOK" 
+    style="position:fixed;top:-9999rpx"
+  />
 </view>
