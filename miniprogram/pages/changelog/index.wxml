@@ -3,6 +3,9 @@
     <view>
       <text>{{item.version}}</text>
     </view>
+    <view>
+      <text>{{item.date}}</text>
+    </view>
     <view wx:for="{{item.info}}">
       <text>{{item}}</text>
     </view>

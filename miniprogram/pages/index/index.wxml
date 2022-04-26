@@ -4,6 +4,9 @@
     <text>{{changelog.version}}</text>
     <text class="more" data-page="changelog" bindtap="jumpTo">更新日志</text>
   </view>
+  <view>
+    <text>{{changelog.date}}</text>
+  </view>
   <view wx:for="{{changelog.info}}">
     <text>{{item}}</text>
   </view>
