@@ -3,8 +3,8 @@
     <view>
       <text>{{item.version}}</text>
     </view>
-    <view>
-      <text>{{item.info}}</text>
+    <view wx:for="{{item.info}}">
+      <text>{{item}}</text>
     </view>
   </view>
 </view>

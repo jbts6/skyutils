@@ -7,7 +7,7 @@
     </radio-group>
     <button type="primary" size="mini" plain="true" bindtap="generate">拼接</button>
   </view>
-  <view class="wrapper" style="width: {{windowWidth - 24 + 'px'}};height: {{windowHeight - 100 + 'px'}}">
+  <view class="wrapper" style="width: {{windowWidth - 24 + 'px'}};height: {{windowHeight - 80 + 'px'}}">
     <scroll-view 
     class="main {{direction === 'horizon' ? '' : 'column'}}" 
     scroll-x="{{direction === 'horizon'}}" 
